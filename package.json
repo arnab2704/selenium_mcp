@@ -1,0 +1,30 @@
+{
+  "name": "selenium-mcp",
+  "version": "1.0.0",
+  "description": "Production-ready MCP (Model Context Protocol) server for controlling Selenium WebDriver via structured tool calls",
+  "type": "module",
+  "main": "server/mcp-server.js",
+  "scripts": {
+    "start": "node server/mcp-server.js",
+    "dev": "node --watch server/mcp-server.js"
+  },
+  "keywords": [
+    "selenium",
+    "mcp",
+    "webdriver",
+    "llm",
+    "automation",
+    "testing"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "selenium-webdriver": "^4.15.0",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {}
+}
