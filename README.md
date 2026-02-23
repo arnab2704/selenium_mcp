@@ -70,6 +70,76 @@ The server will start on `http://localhost:3000` by default.
 PORT=8080 LOG_LEVEL=debug npm start
 ```
 
+## How to Use in IDEs (IntelliJ IDEA & Visual Studio Code)
+
+### Description
+
+A short guide to open, run, and debug the `selenium-mcp` project from IntelliJ IDEA or VS Code. Use the IDE's run/debug configurations to start the MCP server, run example scripts, and attach the debugger to Node.js processes.
+
+### Features
+
+- Run and debug the MCP server directly from the IDE
+- Launch example scripts (`examples/*.js`) with breakpoints
+- Manage environment variables and npm scripts
+- Integrated terminal for `npm install` and `npm start`
+- Support for auto-reload in development using `npm run dev`
+
+### Installation (IDE-specific)
+
+- VS Code:
+  - Install Node.js 20+ and open the project folder.
+  - Install recommended extensions: ESLint, Prettier, Node.js, Debugger for Chrome (optional).
+  - Run `npm install` in the integrated terminal.
+
+- IntelliJ IDEA (or WebStorm):
+  - Open the project folder.
+  - Ensure Node.js plugin/Node interpreter is configured (File > Settings > Languages & Frameworks > Node.js).
+  - Run `npm install` in the built-in terminal.
+
+### Configuration
+
+- VS Code `launch.json` example (place in `.vscode/launch.json`):
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "Launch MCP Server",
+      "program": "${workspaceFolder}/server/mcp-server.js",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PORT": "3000",
+        "LOG_LEVEL": "info"
+      },
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "Run Example Script",
+      "program": "${workspaceFolder}/examples/amazon-iphone-test.js",
+      "cwd": "${workspaceFolder}",
+      "env": { "LOG_LEVEL": "info" }
+    }
+  ]
+}
+```
+
+- IntelliJ Run Configuration:
+  - Create a new "Node.js" run configuration.
+  - Set JavaScript file to `server/mcp-server.js` and working directory to project root.
+  - Add environment variables `PORT=3000` and `LOG_LEVEL=info`.
+  - Use the built-in terminal to run example scripts or create separate Node.js configurations for them.
+
+Notes:
+
+- Use `npm run dev` when working with file watchers for fast feedback.
+- If debugging browser interactions, consider running Chrome with remote debugging port or using headful mode.
+
 ## API Endpoints
 
 ### Health Check
