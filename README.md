@@ -1,6 +1,10 @@
 # selenium-mcp
 
-A production-ready MCP (Model Context Protocol) server that allows LLMs to control Selenium WebDriver via structured tool calls. Built with Node.js, Express, and Selenium WebDriver.
+AI-Native, Non-Coder Web Automation Engine powered by Selenium and Model Context Protocol (MCP)
+
+Selenium-MCP transforms natural language instructions into live browser automation.
+
+Instead of writing test scripts, defining locators, or maintaining frameworks, users simply describe what they want to do — and the engine executes it safely and reliably using Selenium WebDriver.
 
 ## Features
 
