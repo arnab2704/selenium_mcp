@@ -10,38 +10,38 @@ Instead of writing scripts or managing locators, users describe what
 they want to do --- and Selenium-MCP executes it safely in a real
 browser session.
 
-------------------------------------------------------------------------
+---
 
 ## 🧠 Why Selenium-MCP?
 
 Traditional automation requires:
 
--   Programming knowledge\
--   Framework setup\
--   Locator management\
--   Continuous maintenance
+- Programming knowledge\
+- Framework setup\
+- Locator management\
+- Continuous maintenance
 
 Selenium-MCP removes these barriers by introducing:
 
--   Intent-driven automation\
--   Tool-based execution model\
--   Secure browser control layer\
--   Multi-session management
+- Intent-driven automation\
+- Tool-based execution model\
+- Secure browser control layer\
+- Multi-session management
 
 This project bridges AI reasoning and browser automation in a safe and
 structured way.
 
-------------------------------------------------------------------------
+---
 
 ## 🎯 Who Is This For?
 
--   QA teams exploring AI-driven automation\
--   Non-technical users automating workflows\
--   Developers building AI agents\
--   Startups building AI-powered RPA\
--   Automation engineers building next-gen tooling
+- QA teams exploring AI-driven automation\
+- Non-technical users automating workflows\
+- Developers building AI agents\
+- Startups building AI-powered RPA\
+- Automation engineers building next-gen tooling
 
-------------------------------------------------------------------------
+---
 
 ## 🏗 Architecture Overview
 
@@ -59,33 +59,33 @@ Only predefined tools are allowed.\
 No arbitrary JavaScript execution.\
 No system-level access.
 
-------------------------------------------------------------------------
+---
 
 ## ⚙️ Core Features (Phase 1 -- MVP)
 
--   Tool-based execution engine\
--   Multi-session browser management\
--   Structured JSON responses\
--   Secure tool registry\
--   Chrome headless support\
--   Parameter validation\
--   Graceful error handling
+- Tool-based execution engine\
+- Multi-session browser management\
+- Structured JSON responses\
+- Secure tool registry\
+- Chrome headless support\
+- Parameter validation\
+- Graceful error handling
 
-------------------------------------------------------------------------
+---
 
 ## 📦 Installation
 
-``` bash
+```bash
 git clone https://github.com/arnab2704/selenium_mcp.git
 cd selenium_mcp
 npm install
 ```
 
-------------------------------------------------------------------------
+---
 
 ## ▶️ Running the Server
 
-``` bash
+```bash
 npm start
 ```
 
@@ -93,13 +93,71 @@ Default server:
 
 http://localhost:3000
 
-------------------------------------------------------------------------
+---
+
+### Installation (IDE-specific)
+
+- VS Code:
+  - Install Node.js 20+ and open the project folder.
+  - Install recommended extensions: ESLint, Prettier, Node.js, Debugger for Chrome (optional).
+  - Run `npm install` in the integrated terminal.
+
+- IntelliJ IDEA (or WebStorm):
+  - Open the project folder.
+  - Ensure Node.js plugin/Node interpreter is configured (File > Settings > Languages & Frameworks > Node.js).
+  - Run `npm install` in the built-in terminal.
+
+### Configuration
+
+- VS Code `launch.json` example (place in `.vscode/launch.json`):
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "Launch MCP Server",
+      "program": "${workspaceFolder}/server/mcp-server.js",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PORT": "3000",
+        "LOG_LEVEL": "info"
+      },
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "Run Example Script",
+      "program": "${workspaceFolder}/examples/amazon-iphone-test.js",
+      "cwd": "${workspaceFolder}",
+      "env": { "LOG_LEVEL": "info" }
+    }
+  ]
+}
+```
+
+---
+
+- IntelliJ Run Configuration:
+  - Create a new "Node.js" run configuration.
+  - Set JavaScript file to `server/mcp-server.js` and working directory to project root.
+  - Add environment variables `PORT=3000` and `LOG_LEVEL=info`.
+  - Use the built-in terminal to run example scripts or create separate Node.js configurations for them.
+
+Notes:
+
+- Use `npm run dev` when working with file watchers for fast feedback.
+- If debugging browser interactions, consider running Chrome with remote debugging port or using headful mode.
 
 ## 🚀 Quick Start Example
 
 ### 1️⃣ Navigate to a Website
 
-``` bash
+```bash
 curl -X POST http://localhost:3000/execute -H "Content-Type: application/json" -d '{
   "sessionId": "demo",
   "tool": "navigate",
@@ -109,11 +167,11 @@ curl -X POST http://localhost:3000/execute -H "Content-Type: application/json" -
 }'
 ```
 
-------------------------------------------------------------------------
+---
 
 ### 2️⃣ Verify an Element Exists
 
-``` bash
+```bash
 curl -X POST http://localhost:3000/execute -H "Content-Type: application/json" -d '{
   "sessionId": "demo",
   "tool": "verify",
@@ -124,7 +182,7 @@ curl -X POST http://localhost:3000/execute -H "Content-Type: application/json" -
 }'
 ```
 
-------------------------------------------------------------------------
+---
 
 ## 🔌 API Reference
 
@@ -132,19 +190,19 @@ curl -X POST http://localhost:3000/execute -H "Content-Type: application/json" -
 
 Check server status.
 
-------------------------------------------------------------------------
+---
 
 ### GET /tools
 
 Returns all available tools and their parameter schemas.
 
-------------------------------------------------------------------------
+---
 
 ### GET /sessions
 
 Lists active browser sessions.
 
-------------------------------------------------------------------------
+---
 
 ### POST /execute
 
@@ -159,81 +217,81 @@ Response:
 { "success": true, "sessionId": "demo", "result": "Navigation
 successful" }
 
-------------------------------------------------------------------------
+---
 
 ### POST /sessions/{id}/close
 
 Closes a browser session safely.
 
-------------------------------------------------------------------------
+---
 
 ## 🧩 Supported Tools (Phase 1)
 
--   navigate\
--   click\
--   input\
--   wait\
--   verify\
--   screenshot
+- navigate\
+- click\
+- input\
+- wait\
+- verify\
+- screenshot
 
 Each tool:
 
--   Has defined schema\
--   Validates parameters\
--   Handles errors safely\
--   Returns structured JSON
+- Has defined schema\
+- Validates parameters\
+- Handles errors safely\
+- Returns structured JSON
 
-------------------------------------------------------------------------
+---
 
 ## 🔐 Security Model
 
 Selenium-MCP is designed for AI-driven usage and includes strict
 guardrails:
 
--   Only predefined tools can execute\
--   No arbitrary JavaScript execution\
--   No file system access\
--   Parameter validation required\
--   Isolated browser sessions\
--   Graceful driver shutdown
+- Only predefined tools can execute\
+- No arbitrary JavaScript execution\
+- No file system access\
+- Parameter validation required\
+- Isolated browser sessions\
+- Graceful driver shutdown
 
-------------------------------------------------------------------------
+---
 
 ## 🗺 Roadmap
 
 ### Phase 2
 
--   Smart locator prioritization\
--   Structured execution logs\
--   Auto screenshot on failure\
--   Improved error explanations
+- Smart locator prioritization\
+- Structured execution logs\
+- Auto screenshot on failure\
+- Improved error explanations
 
 ### Phase 3
 
--   Web UI for non-coders\
--   WebSocket streaming mode\
--   Multi-browser support\
--   Docker support\
--   Cloud-ready deployment
+- Web UI for non-coders\
+- WebSocket streaming mode\
+- Multi-browser support\
+- Docker support\
+- Cloud-ready deployment
 
 ### Long-Term Vision
 
 AI-driven, self-healing automation engine for non-technical users.
 
-------------------------------------------------------------------------
+---
 
 ## 🧪 Testing
 
 Recommended testing approach:
 
--   API contract testing\
--   Multi-session stress testing\
--   Browser crash recovery testing\
--   Negative and security testing
+- API contract testing\
+- Multi-session stress testing\
+- Browser crash recovery testing\
+- Negative and security testing
 
 Future versions will include automated CI workflows.
 
-------------------------------------------------------------------------
+---
 
 ## 🤝 Contributing
 
@@ -241,11 +299,11 @@ Contributions are welcome.
 
 Please follow these guidelines:
 
--   Write clean, modular code\
--   Follow existing folder structure\
--   Add validation for new tools\
--   Update documentation\
--   Test before submitting PR
+- Write clean, modular code\
+- Follow existing folder structure\
+- Add validation for new tools\
+- Update documentation\
+- Test before submitting PR
 
 Steps:
 
@@ -254,13 +312,13 @@ Steps:
 3.  Commit changes\
 4.  Submit a Pull Request
 
-------------------------------------------------------------------------
+---
 
 ## 📜 License
 
-MIT License
+Apache 2.0 License
 
-------------------------------------------------------------------------
+---
 
 ## 👨‍💻 Author
 
